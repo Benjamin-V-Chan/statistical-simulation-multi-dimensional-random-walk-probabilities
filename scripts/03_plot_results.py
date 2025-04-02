@@ -1,11 +1,18 @@
-"""
-1. Import necessary modules (pandas, matplotlib.pyplot, os).
-2. Define main():
-    - Read the analysis summary CSV file ("analysis_results.csv") from the outputs directory.
-    - Create a bar chart:
-         - The x-axis represents the dimension.
-         - The y-axis represents the probability of returning to the origin.
-    - Add an appropriate title and axis labels to the plot.
-    - Save the plot as a PNG file (e.g., "return_probability.png") in the outputs directory.
-3. Include the standard execution guard to run main().
-"""
+import pandas as pd
+import matplotlib.pyplot as plt
+import os
+
+def main():
+    input_file = os.path.join("..", "outputs", "analysis_results.csv")
+    df = pd.read_csv(input_file)
+    plt.figure()
+    plt.bar(df["dimension"].astype(str), df["probability"])
+    plt.title("Probability of Returning to Origin by Dimension")
+    plt.xlabel("Dimension")
+    plt.ylabel("Probability")
+    output_path = os.path.join("..", "outputs", "return_probability.png")
+    plt.savefig(output_path)
+    plt.close()
+
+if __name__ == "__main__":
+    main()
